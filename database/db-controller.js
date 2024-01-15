@@ -47,6 +47,24 @@ class Items {
         });
     }
 
+    nameCheck(name) {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(database);
+            db.get('SELECT name FROM items WHERE name = ?', [name], (err, row) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    if (row) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                }
+                db.close();
+            });
+        });
+    }
 
     putItem(name, category, description, price, dminfo, imageurl, homebrew) {
         const db = new sqlite3.Database(database);
@@ -55,7 +73,7 @@ class Items {
         } else {
             homebrew = 0;
         }
-        db.run('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, category VARCHAR(255) NOT NULL, description TEXT NOT NULL, price INTEGER NOT NULL, dminfo TEXT, imageurl VARCHAR(255), homebrew INTEGER DEFAULT 0)', (err) => {
+        db.run('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL UNIQUE, category VARCHAR(255) NOT NULL, description TEXT NOT NULL, price INTEGER NOT NULL, dminfo TEXT, imageurl VARCHAR(255), homebrew INTEGER DEFAULT 0)', (err) => {
             if (err) {
                 console.log(err);
             } else {
