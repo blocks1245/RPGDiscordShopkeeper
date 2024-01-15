@@ -19,7 +19,7 @@ fs.readFile('./bulkData.csv', 'utf8', (err, data) => {
 
             const query = `INSERT INTO items (name, category, description, price, dminfo, imageurl, homebrew) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-            db.run(query, [name, category, description, price, dminfo, imageUrl, homebrew], (err) => {
+            db.run(query, [name.toUpperCase(), category.toUpperCase(), description, price, dminfo, imageUrl, homebrew], (err) => {
                 if (err) {
                     console.error('Error inserting data:', err);
                 } else {
