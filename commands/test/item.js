@@ -34,7 +34,7 @@ module.exports = {
                     option
                         .setName('description')
                         .setDescription('The description of the item available for all players')
-                        .setRequired(true),
+                        .setRequired(false),
                 )
                 .addIntegerOption(option =>
                     option
@@ -84,7 +84,7 @@ module.exports = {
 				.addStringOption(option =>
 					option
 						.setName('category')
-						.setDescription('The category of the item you want to add')
+						.setDescription('The category of the item you are editing')
 						.addChoices(
 							{name: 'Weapon', value: 'weapon'},
 							{name: 'Armor', value: 'armor'},
@@ -92,25 +92,25 @@ module.exports = {
 							{name: 'Magic Item', value: 'Magic Item'},
 							{name: 'Misc', value: 'misc'},
 							)
-						.setRequired(true),
+						.setRequired(false),
 				)
 				.addStringOption(option =>
 					option
 						.setName('description')
 						.setDescription('The description of the item available for all players')
-						.setRequired(true),
+						.setRequired(false),
 				)
 				.addIntegerOption(option =>
 					option
 					.setName('price')
 					.setDescription('The price of the item')
-					.setRequired(true),
+					.setRequired(false),
 				)
 				.addBooleanOption(option =>
 					option
 						.setName('homebrew')
 						.setDescription('Whether the item is homebrew or not')
-						.setRequired(true),
+						.setRequired(false),
 				)
 				.addStringOption(option =>
 					option
