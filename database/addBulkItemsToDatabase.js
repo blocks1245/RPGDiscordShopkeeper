@@ -14,6 +14,8 @@ fs.readFile('./bulkData.csv', 'utf8', (err, data) => {
     lines.forEach((line) => {
         const values = line.split(';').map((value) => value.trim());
 
+        db.run('CREATE TABLE IF NOT EXISTS items (name TEXT, category TEXT, description TEXT, price INTEGER, dminfo TEXT, imageurl TEXT, homebrew INTEGER)');
+
         if (values.length === 7) {
             const [name, category, description, price, dminfo, imageUrl, homebrew] = values;
 
