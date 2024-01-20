@@ -81,7 +81,6 @@ module.exports = {
         let DMRole = interaction.guild.roles.cache.find(role => role.name === 'DM');
         let PlayerRole = interaction.guild.roles.cache.find(role => role.name === 'Player');
         switch (interaction.options.getSubcommand()) {
-// available command
             case 'available':
                 await available();
                 break;
