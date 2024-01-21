@@ -30,12 +30,6 @@ module.exports = {
                             )
                         .setRequired(true),
                 )
-                .addStringOption(option =>
-                    option
-                        .setName('description')
-                        .setDescription('The description of the item available for all players')
-                        .setRequired(false),
-                )
                 .addIntegerOption(option =>
                     option
                     .setName('price')
@@ -47,6 +41,12 @@ module.exports = {
                         .setName('homebrew')
                         .setDescription('Whether the item is homebrew or not')
                         .setRequired(true),
+                )
+				.addStringOption(option =>
+                    option
+                        .setName('description')
+                        .setDescription('The description of the item available for all players')
+                        .setRequired(false),
                 )
                 .addStringOption(option =>
                     option
@@ -102,9 +102,9 @@ module.exports = {
 				)
 				.addIntegerOption(option =>
 					option
-					.setName('price')
-					.setDescription('The price of the item')
-					.setRequired(false),
+						.setName('price')
+						.setDescription('The price of the item')
+						.setRequired(false),
 				)
 				.addBooleanOption(option =>
 					option

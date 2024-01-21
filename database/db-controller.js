@@ -31,9 +31,10 @@ class Items {
     }
 
     fetchItem(name) { 
+        const localName = name.toUpperCase();
         return new Promise((resolve, reject) => {
             const db = new sqlite3.Database(database);
-            db.get('SELECT * FROM items WHERE name = ?', [name], (err, row) => {
+            db.get('SELECT * FROM items WHERE name = ?', [localName], (err, row) => {
                 if (err) {
                     console.log(err);
                     reject(err);
@@ -48,9 +49,10 @@ class Items {
     }
 
     nameCheck(name) {
+        const localName = name.toUpperCase();
         return new Promise((resolve, reject) => {
             const db = new sqlite3.Database(database);
-            db.get('SELECT name FROM items WHERE name = ?', [name], (err, row) => {
+            db.get('SELECT name FROM items WHERE name = ?', [localName], (err, row) => {
                 if (err) {
                     console.log(err);
                     reject(err);
@@ -90,8 +92,9 @@ class Items {
     }
 
     deleteItem(name) {
+        const localName = name.toUpperCase();
         const db = new sqlite3.Database(database);
-        db.run('DELETE FROM items WHERE name = ?', [name], (err) => {
+        db.run('DELETE FROM items WHERE name = ?', [localName], (err) => {
             if (err) {
                 console.log(err);
             } else {
