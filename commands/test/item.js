@@ -184,7 +184,7 @@ module.exports = {
 		if (!dminfo) {
 			dminfo = '';
 		}
-		if (!await ItemsInstance.nameCheck(name)) {
+		if (await ItemsInstance.nameCheck(name)) {
 			await interaction.reply({ content: 'Item already exists', ephemeral: true });
 			return;
 		}
