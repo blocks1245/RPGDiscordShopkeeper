@@ -3,12 +3,10 @@ const sqlite3 = require('sqlite3').verbose();
 const database = 'database/database.sqlite';
 
 const dbInit = new Initialise();
+dbInit.initialise(database);
+
 
 class Items {
-    constructor() {
-        dbInit.initialise(database);
-    }
-
     fetchAll() {
         const db = new sqlite3.Database(database);
         db.execute('SELECT * FROM items')
@@ -129,4 +127,23 @@ class Items {
     }
 }
 
-module.exports = { Items };
+class Player {
+    fetchAllnames() {
+        const db = new sqlite3.Database(database);
+        db.execute('SELECT username FROM players')
+            .then(([rows, fieldData]) => {
+                console.log(rows); //giving the required data
+                return rows;
+            })
+    }
+
+    fetchPlayerByName(name) {
+
+    }
+
+    fetchPlayerById(id) {
+
+    }
+}
+
+module.exports = { Items, Player };
