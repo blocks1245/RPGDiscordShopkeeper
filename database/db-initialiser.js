@@ -9,7 +9,39 @@ class Initialise {
 
     createItemsTable() {
         const db = new sqlite3.Database(database);
-        db.run('CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, category TEXT NOT NULL, description TEXT, price varchar(32), dminfo TEXT, imageurl TEXT, homebrew INTEGER NOT NULL)');
+        db.run(`CREATE TABLE IF NOT EXISTS items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            name TEXT NOT NULL, 
+            category TEXT NOT NULL, 
+            description TEXT, 
+            price INTEGER, 
+            dminfo TEXT, 
+            imageurl TEXT, 
+            homebrew INTEGER NOT NULL)`);
+    }
+
+    createShopTable() {
+        const db = new sqlite3.Database(database);
+        db.run(`CREATE TABLE IF NOT EXISTS shop (
+            itemid INTEGER NOT NULL, 
+            FOREIGN KEY(itemid) REFERENCES items(id))`);
+    }
+
+    createInventoryTable() {
+        const db = new sqlite3.Database(database);
+        db.run(`CREATE TABLE IF NOT EXISTS inventory (
+            userid INTEGER NOT NULL, 
+            itemid INTEGER NOT NULL, 
+            FOREIGN KEY(userid) REFERENCES players(id), 
+            FOREIGN KEY(itemid) REFERENCES items(id))`);
+    }
+
+    createPlayersTable() {
+        const db = new sqlite3.Database(database);
+        db.run(`CREATE TABLE IF NOT EXISTS players (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            username TEXT NOT NULL, description TEXT, 
+            coins INTEGER NOT NULL)`);
     }
 
     closeDb() {
