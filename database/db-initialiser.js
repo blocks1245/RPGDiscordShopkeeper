@@ -40,8 +40,11 @@ class Initialise {
         const db = new sqlite3.Database(database);
         db.run(`CREATE TABLE IF NOT EXISTS players (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            username TEXT NOT NULL, description TEXT, 
-            coins INTEGER NOT NULL)`);
+            discordid integer NOT NULL,
+            name TEXT NOT NULL, description TEXT,
+            description TEXT,
+            coppercoin INTEGER DEFAULT 0
+            image BLOB)`);
     }
 
     closeDb() {
