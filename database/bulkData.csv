@@ -1,37 +1,37 @@
-Club;Weapon;1d4 bludgeoning,Light;1 sp;;;0
-Dagger;Weapon;1d4 piercing Finesse, light, thrown (range 20/60);2 gp;;;0
-Greatclub;Weapon;1d8 bludgeoning,Two-handed;2 sp;;;0
-Handaxe;Weapon;1d6 slashing,Light, thrown (range 20/60);5 gp;;;0
-Javelin;Weapon;1d6 piercing,Thrown (range 30/120);5 sp;;;0
-Light hammer;Weapon;1d4 bludgeoning,Light, thrown (range 20/60);2 gp;;;0
+Club;Weapon;1d4 bludgeoning,Light;10;;;0
+Dagger;Weapon;1d4 piercing Finesse, light, thrown (range 20/60);200;;;0
+Greatclub;Weapon;1d8 bludgeoning,Two-handed;20;;;0
+Handaxe;Weapon;1d6 slashing,Light, thrown (range 20/60);500;;;0
+Javelin;Weapon;1d6 piercing,Thrown (range 30/120);50;;;0
+Light hammer;Weapon;1d4 bludgeoning,Light, thrown (range 20/60);200;;;0
 Mace;Weapon;1d6 bludgeoning;;;0
-Quarterstaff;Weapon;1d6 bludgeoning,Versatile (1d8);2 sp;;;0
-Sickle;Weapon;1d4 slashing,Light;1 gp;;;0
-Spear;Weapon;1d6 piercing,Thrown (range 20/60), versatile (1d8);1 gp;;;0
-Unarmed strike;Weapon;1 bludgeoning;0 gp;;;0
-Crossbow, light;Weapon;1d8 piercing Ammunition (range 80/320), loading, two-handed;25 gp;;;0
-Dart;Weapon;1d4 piercing Finesse, thrown (range 20/60);5 cp;;;0
-Shortbow;Weapon;1d6 piercing Ammunition (range 80/320), two-handed;25 gp;;;0
-Sling;Weapon;1d4 bludgeoning Ammunition (range 30/120);1 sp;;;0
-Battleaxe;Weapon;1d8 slashing Versatile (1d10);10 gp;;;0
-Flail;Weapon;1d8 bludgeoning;10 gp;;;0
-Glaive;Weapon;1d10 slashing Heavy, reach, two-handed;20 gp;;;0
-Greataxe;Weapon;1d12 slashing Heavy, two-handed;30 gp;;;0
-Greatsword;Weapon;2d6 slashing Heavy, two-handed;50 gp;;;0
-Halberd;Weapon;1d10 slashing Heavy, reach, two-handed;20 gp;;;0
-Lance;Weapon;1d12 piercing Reach, special;10 gp;;;0
-Longsword;Weapon;1d8 slashing Versatile (1d10);15 gp;;;0
-Maul;Weapon;2d6 bludgeoning Heavy, two-handed;10 gp;;;0
-Morningstar;Weapon;1d8 piercing;15 gp;;;0
-Pike;Weapon;1d10 piercing Heavy, reach, two-handed;5 gp;;;0
-Rapier;Weapon;1d8 piercing Finesse;25 gp;;;0
-Scimitar;Weapon;1d6 slashing Finesse, light;25 gp;;;0
-Shortsword;Weapon;1d6 piercing Finesse, light;10 gp;;;0
-Trident;Weapon;1d6 piercing Thrown (range 20/60), versatile (1d8);5 gp;;;0
-War pick;Weapon;1d8 piercing;5 gp;;;0
-Warhammer;Weapon;1d8 bludgeoning Versatile (1d10);15 gp;;;0
-Whip;Weapon;1d4 slashing Finesse, reach;2 gp;;;0
-Blowgun;Weapon;1 piercing Ammunition (range 25/100), loading;10 gp;;;0
-Crossbow, hand;Weapon;1d6 piercing Ammunition (range 30/120), light, loading;75 gp;;;0
-Crossbow, heavy;Weapon;1d10 piercing Ammunition (range 100/400), heavy, loading, two-handed;50 gp;;;0
-Longbow;Weapon;1d8 piercing Ammunition (range 150/600), heavy, two-handed;50 gp;;;0
+Quarterstaff;Weapon;1d6 bludgeoning,Versatile (1d8);20;;;0
+Sickle;Weapon;1d4 slashing,Light;100;;;0
+Spear;Weapon;1d6 piercing,Thrown (range 20/60), versatile (1d8);100;;;0
+Unarmed strike;Weapon;1 bludgeoning;1000;;;0
+Crossbow, light;Weapon;1d8 piercing Ammunition (range 80/320), loading, two-handed;2500;;;0
+Dart;Weapon;1d4 piercing Finesse, thrown (range 20/60);5;;;0
+Shortbow;Weapon;1d6 piercing Ammunition (range 80/320), two-handed;2500;;;0
+Sling;Weapon;1d4 bludgeoning Ammunition (range 30/120);10;;;0
+Battleaxe;Weapon;1d8 slashing Versatile (1d10);1000;;;0
+Flail;Weapon;1d8 bludgeoning;1000;;;0
+Glaive;Weapon;1d10 slashing Heavy, reach, two-handed;2000;;;0
+Greataxe;Weapon;1d12 slashing Heavy, two-handed;3000;;;0
+Greatsword;Weapon;2d6 slashing Heavy, two-handed;5000;;;0
+Halberd;Weapon;1d10 slashing Heavy, reach, two-handed;2000;;;0
+Lance;Weapon;1d12 piercing Reach, special;1000;;;0
+Longsword;Weapon;1d8 slashing Versatile (1d10);1500;;;0
+Maul;Weapon;2d6 bludgeoning Heavy, two-handed;1000;;;0
+Morningstar;Weapon;1d8 piercing;1500;;;0
+Pike;Weapon;1d10 piercing Heavy, reach, two-handed;500;;;0
+Rapier;Weapon;1d8 piercing Finesse;2500;;;0
+Scimitar;Weapon;1d6 slashing Finesse, light;2500;;;0
+Shortsword;Weapon;1d6 piercing Finesse, light;1000;;;0
+Trident;Weapon;1d6 piercing Thrown (range 20/60), versatile (1d8);500;;;0
+War pick;Weapon;1d8 piercing;500;;;0
+Warhammer;Weapon;1d8 bludgeoning Versatile (1d10);1500;;;0
+Whip;Weapon;1d4 slashing Finesse, reach;200;;;0
+Blowgun;Weapon;1 piercing Ammunition (range 25/100), loading;1000;;;0
+Crossbow, hand;Weapon;1d6 piercing Ammunition (range 30/120), light, loading;7500;;;0
+Crossbow, heavy;Weapon;1d10 piercing Ammunition (range 100/400), heavy, loading, two-handed;5000;;;0
+Longbow;Weapon;1d8 piercing Ammunition (range 150/600), heavy, two-handed;5000;;;0
