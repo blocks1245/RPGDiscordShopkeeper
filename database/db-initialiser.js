@@ -1,14 +1,18 @@
 const sqlite3 = require('sqlite3').verbose();
 const database = 'database/database.sqlite';
 
+const db = new sqlite3.Database(database);
+
 class Initialise {
     initialise(databasePath) {
         this.createItemsTable();
-        this.closeDb();
+        this.createShopTable();
+        this.createInventoryTable();
+        this.createPlayersTable();
+        db.close();
     }
 
     createItemsTable() {
-        const db = new sqlite3.Database(database);
         db.run(`CREATE TABLE IF NOT EXISTS items (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             name TEXT NOT NULL, 
@@ -21,14 +25,12 @@ class Initialise {
     }
 
     createShopTable() {
-        const db = new sqlite3.Database(database);
         db.run(`CREATE TABLE IF NOT EXISTS shop (
             itemid INTEGER NOT NULL, 
             FOREIGN KEY(itemid) REFERENCES items(id))`);
     }
 
     createInventoryTable() {
-        const db = new sqlite3.Database(database);
         db.run(`CREATE TABLE IF NOT EXISTS inventory (
             userid INTEGER NOT NULL, 
             itemid INTEGER NOT NULL, 
@@ -37,19 +39,13 @@ class Initialise {
     }
 
     createPlayersTable() {
-        const db = new sqlite3.Database(database);
         db.run(`CREATE TABLE IF NOT EXISTS players (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             discordid integer NOT NULL,
-            name TEXT NOT NULL, description TEXT,
+            name TEXT NOT NULL UNIQUE,
             description TEXT,
-            coppercoin INTEGER DEFAULT 0
-            image BLOB)`);
-    }
-
-    closeDb() {
-        const db = new sqlite3.Database(database);
-        db.close();
+            coppercoin INTEGER DEFAULT 0,
+            image TEXT)`);
     }
 }
 

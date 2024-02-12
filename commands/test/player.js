@@ -7,11 +7,16 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('player')
         .setDescription('Player commands')
-        .addStringOption(option =>
-            option
-                .setName('name')
-                .setDescription('The name of the player')
-                .setRequired(false),
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('info')
+                .setDescription('Get information about a player')
+                .addStringOption(option =>
+                    option
+                        .setName('name')
+                        .setDescription('The name of the player')
+                        .setRequired(false),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -21,55 +26,111 @@ module.exports = {
                     option
                         .setName('name')
                         .setDescription('The name of the player')
-                        .setRequired(true),
+                        .setRequired(false),
                 )
+                .addStringOption(option =>
+                    option
+                        .setName('description')
+                        .setDescription('The description of the player')
+                        .setRequired(false),
+                )
+                .addIntegerOption(option =>
+                    option
+                        .setName('coppercoin')
+                        .setDescription('The amount of coppercoin the player has')
+                        .setRequired(false),
+                )
+                .addAttachmentOption(option =>
+                    option
+                        .setName('image')
+                        .setDescription('The image of the player')
+                        .setRequired(false),
+                ),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('List all players')
-            ),
+                .setDescription('List all players'),
+        ),
     async execute(interaction) {
-        const userid = interaction.user.id;
         switch (interaction.options.getSubcommand()) {
+            case 'info':
+                await info(interaction);
+                break;
             case 'edit':
-                await edit();
+                await edit(interaction);
                 break;
             case 'list':
-                await list();
+                await list(interaction);
                 break;
-            case null:
-                await handleBaseCommand();
             default:
-                await interaction.reply('Unknown subcommand');
+                await interaction.reply('Unknown subcommand', { ephemeral: true });
                 break;
         }
     }
 };
 
-async function edit() {
-
-}
-
-async function list() {
-
-}
-
-async function handleBaseCommand() {
+async function info(interaction) {
+    //TODO make it work
     const name = interaction.options.getString('name');
+    let fetchedPlayer;
     if (name) {
-        const fetchedPlayer = await player.fetchPlayerByName(name);
+        fetchedPlayer = await player.fetchPlayerByName(name);
     } else {
-        const fetchedPlayer = await player.fetchPlayerById(interaction.user.id);
+        fetchedPlayer = await player.fetchPlayerByDiscordId(interaction.user.id);
     }
     if (fetchedPlayer) {
         const embed = new EmbedBuilder()
             .setTitle(fetchedPlayer.name)
             .setDescription(fetchedPlayer.description)
-            .setColor('#3498db'); //TODO: change color to preferred color by player
-        // TODO: add more fields to the embed
-        // TODO: add thumbnail to the embed if available
+            .setColor('#3498db') //TODO: change color to preferred color by player?
+            .addFields({ name: 'Coppercoin', value: `${fetchedPlayer.coppercoin} :coin:`, inline: true });
+        if (fetchedPlayer.image) {
+            embed.setThumbnail(await fetchedPlayer.image);
+            await interaction.reply({ embeds: [embed] });
+        } else {
+            await interaction.reply({ embeds: [embed] });
+        }
     } else {
         await interaction.reply({ content: 'That player was not found', ephemeral: true });
+    }
+}
+
+async function edit(interaction) {
+    const name = interaction.options.getString('name');
+    const description = interaction.options.getString('description');
+    const coppercoin = interaction.options.getInteger('coppercoin');
+    const image = interaction.options.getAttachment('image');
+
+    const fetchedPlayer = await player.fetchPlayerByDiscordId(interaction.user.id);
+    if (fetchedPlayer) {
+        playerName = name || fetchedPlayer.name;
+        playerDescription = description || fetchedPlayer.description;
+        playerCoppercoin = coppercoin || fetchedPlayer.coppercoin;
+        playerImage = image ? image.attachment : fetchedPlayer.image;
+
+        await player.updatePlayer(interaction.user.id, playerName, playerDescription, playerCoppercoin, playerImage);
+        interaction.reply({ content: 'Player updated', ephemeral: true });
+    } else {
+        if (name) {
+            // TODO: edit this to be only the edit function instead of the put function
+            await player.putPlayer(name, interaction.user.id);
+            interaction.reply({ content: 'Player added', ephemeral: true });
+        } else {
+            await interaction.reply({ content: 'No player found, to add a new player please start by adding a name', ephemeral: true });
+        }
+    }
+}
+
+async function list(interaction) {
+    const fetchedPlayers = await player.fetchAllNames();
+    if (fetchedPlayers && fetchedPlayers.length > 0) {
+        const embed = new EmbedBuilder()
+            .setTitle('Players')
+            .setColor('#3498db')
+            .setDescription(fetchedPlayers.join('\n'));
+        await interaction.reply({ embeds: [embed] });
+    } else {
+        await interaction.reply({ content: 'No players found', ephemeral: true });
     }
 }

@@ -28,7 +28,7 @@ Table players {
   name text [not null]
   description text
   coppercoin int [default: 0]
-  image blob
+  image text
 }
 
 Table quests {

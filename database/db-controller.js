@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const Initialise = require('../database/db-initialiser.js');
 const sqlite3 = require('sqlite3').verbose();
 const database = 'database/database.sqlite';
@@ -128,21 +129,74 @@ class Items {
 }
 
 class Player {
-    fetchAllnames() {
+    fetchAllNames() {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(database);
+            db.all('SELECT name FROM players', (err, rows) => {
+                if (err) {
+                    console.error(err.message);
+                    reject(err);
+                } else {
+                    const names = rows.map(row => row.name);
+                    resolve(names);
+                }
+                db.close();
+            });
+        });
+    }
+
+    async fetchPlayerByName(name) {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(database);
+            db.get('SELECT * FROM players WHERE name = ?', [name], (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+                db.close();
+            });
+        });
+    }
+
+    async fetchPlayerByDiscordId(id) {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(database);
+            db.get('SELECT * FROM players WHERE discordid = ?', [id], (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+                db.close();
+            });
+        });
+    }
+
+    async putPlayer(name, discordid) {
         const db = new sqlite3.Database(database);
-        db.execute('SELECT username FROM players')
-            .then(([rows, fieldData]) => {
-                console.log(rows); //giving the required data
-                return rows;
-            })
+        db.run('INSERT INTO players (name, discordid) VALUES (?,?)', [name, discordid], (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Player added');
+            }
+            db.close();
+        });
     }
 
-    fetchPlayerByName(name) {
-
-    }
-
-    fetchPlayerById(id) {
-
+    async updatePlayer(discordid, name, description, coppercoin, image) {
+        const db = new sqlite3.Database(database);
+        db.run('UPDATE players SET name = ?, description = ?, coppercoin = ?, image = ? WHERE discordid = ?', [name, description, coppercoin, image, discordid], (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Player updated');
+            }
+            db.close();
+        });
     }
 }
 
