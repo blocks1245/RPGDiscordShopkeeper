@@ -94,7 +94,7 @@ module.exports = {
                 await interaction.reply({ content: 'This command is not yet implemented', ephemeral: true });
                 break;
             default:
-                await interaction.reply('Unknown subcommand');
+                await interaction.reply('Unknown subcommand', { ephemeral: true });
                 break;
         }
 
