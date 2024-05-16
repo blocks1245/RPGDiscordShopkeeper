@@ -109,8 +109,16 @@ async function edit(interaction) {
         playerCoppercoin = coppercoin || fetchedPlayer.coppercoin;
         playerImage = image ? image.attachment : fetchedPlayer.image;
 
-        await player.updatePlayer(interaction.user.id, playerName, playerDescription, playerCoppercoin, playerImage);
-        interaction.reply({ content: 'Player updated', ephemeral: true });
+        if (playerName.length > 255) {
+            await interaction.reply({ content: 'Name is too long, please shorten it to less than 255 characters', ephemeral: true });
+            return;
+        } else if (playerDescription.length > 1024) {
+            await interaction.reply({ content: 'Description is too long please shorten it to less than 1024 characters', ephemeral: true });
+            return;
+        } else {
+            await player.updatePlayer(interaction.user.id, playerName, playerDescription, playerCoppercoin, playerImage);
+            interaction.reply({ content: 'Player updated', ephemeral: true });
+        }
     } else {
         if (name) {
             // TODO: edit this to be only the edit function instead of the put function

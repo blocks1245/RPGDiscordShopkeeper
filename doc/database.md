@@ -25,7 +25,7 @@ Table inventory {
 Table players {
   id int [primary key, increment]
   discordid int [not null]
-  name text [not null]
+  name tinytext [not null]
   description text
   coppercoin int [default: 0]
   image text

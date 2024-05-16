@@ -40,7 +40,7 @@ class Items {
         const localName = name.toUpperCase();
         return new Promise((resolve, reject) => {
             const db = new sqlite3.Database(database);
-            db.get('SELECT * FROM items WHERE name = ?', [localName], (err, row) => {
+            db.get('SELECT * FROM items WHERE name = ? COLLATE NOCASE', [localName], (err, row) => {
                 if (err) {
                     console.log(err);
                     reject(err);
@@ -58,7 +58,7 @@ class Items {
         const localName = name.toUpperCase();
         return new Promise((resolve, reject) => {
             const db = new sqlite3.Database(database);
-            db.get('SELECT name FROM items WHERE name = ?', [localName], (err, row) => {
+            db.get('SELECT name FROM items WHERE name = ? COLLATE NOCASE', [localName], (err, row) => {
                 if (err) {
                     console.log(err);
                     reject(err);
@@ -96,7 +96,7 @@ class Items {
     deleteItem(name) {
         const localName = name.toUpperCase();
         const db = new sqlite3.Database(database);
-        db.run('DELETE FROM items WHERE name = ?', [localName], (err) => {
+        db.run('DELETE FROM items WHERE name = ? COLLATE NOCASE', [localName], (err) => {
             if (err) {
                 console.log(err);
             } else {
@@ -113,7 +113,7 @@ class Items {
         } else {
             homebrew = 0;
         }
-        db.run('UPDATE items SET category= ?, description = ?, price = ?, dminfo = ?, imageurl = ?, homebrew = ? WHERE name = ?', [category, description, price, dminfo, imageurl, homebrew, name], (err) => {
+        db.run('UPDATE items SET category= ?, description = ?, price = ?, dminfo = ?, imageurl = ?, homebrew = ? WHERE name = ? COLLATE NOCASE', [category, description, price, dminfo, imageurl, homebrew, name], (err) => {
             if (err) {
                 console.log(err);
             } else {
@@ -148,7 +148,7 @@ class Player {
     async fetchPlayerByName(name) {
         return new Promise((resolve, reject) => {
             const db = new sqlite3.Database(database);
-            db.get('SELECT * FROM players WHERE name = ?', [name], (err, row) => {
+            db.get('SELECT * FROM players WHERE name = ? COLLATE NOCASE', [name], (err, row) => {
                 if (err) {
                     console.error(err.message);
                     reject(err);

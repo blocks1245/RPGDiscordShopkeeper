@@ -42,7 +42,7 @@ class Initialise {
         db.run(`CREATE TABLE IF NOT EXISTS players (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             discordid integer NOT NULL,
-            name TEXT NOT NULL UNIQUE,
+            name TINYTEXT NOT NULL UNIQUE,
             description TEXT,
             coppercoin INTEGER DEFAULT 0,
             image TEXT)`);
