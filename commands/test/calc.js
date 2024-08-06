@@ -1,5 +1,24 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder,  } = require('discord.js');
 
+function calcXP(cr) {
+    xpList = [];
+    for (let lvl = 1; lvl <= 20; lvl++) {
+        const xp = ((55*cr**2+60*cr)*(0.8+0.2*(cr/lvl)));
+        const roundedXp = Math.round(xp /50) * 50;
+        xpList.push(roundedXp);
+    }
+    return xpList;
+}
+
+function xpToString(xpList) {
+    let xpString = '';
+    for (let i = 0; i < xpList.length; i++) {
+        xpString += `- **Level ${i+1}:** ${xpList[i]}\n`;
+    }
+    return xpString;
+
+}
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('calculatexp')
@@ -7,24 +26,12 @@ module.exports = {
         .addIntegerOption(option =>
             option.setName('challengecr')
                 .setDescription('The cr of the challenge/adventure')
-                .setRequired(true))
-        .addIntegerOption(option =>
-            option.setName('apl')
-                .setDescription('average party level')
-                .setRequired(true))
-        .addIntegerOption(option =>
-            option.setName('leveldifference')
-                .setDescription('The amount of levels the party is below the highest level player')
                 .setRequired(true)),
     async execute(interaction) {
         const cr = interaction.options.getInteger('challengecr');
-        const apl = interaction.options.getInteger('apl');
-        const levelDifference = interaction.options.getInteger('leveldifference');
-        const n = apl - cr;
-        const xp = (100 * cr*(n/2+3)*(levelDifference/4+1));
         const embed = new EmbedBuilder()
             .setTitle('Calculator')
-            .setDescription(`The result is \`${xp}\`.`)
+            .setDescription(xpToString(calcXP(cr)))
             .setColor('#3498db');
         await interaction.reply({ embeds: [embed] });
     },
